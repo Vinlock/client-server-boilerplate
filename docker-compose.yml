@@ -1,0 +1,34 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: server/
+      dockerfile: ./.dev/Dockerfile
+    volumes:
+      - ./server:/var/app
+    ports:
+      - 56748:56748
+      - 3000:3000
+    environment:
+      NODEMON_DEBUG_PORT: 56748
+      APP_PORT: 3000
+      APP_MONGO_CONNECTION: mongodb://localhost:5000
+  frontend:
+    build:
+      context: client/
+      dockerfile: ./.dev/Dockerfile
+    volumes:
+      - ./client:/var/app
+    ports:
+      - 8000:8000
+    environment:
+      NODE_ENV: development
+  mongo:
+    image: mongo:latest
+    volumes:
+      - mongo-data:/data
+    ports:
+      - 5000:6379
+
+volumes:
+  mongo-data:

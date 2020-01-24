@@ -1,0 +1,49 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@types/koa-bodyparser": "^4.3.0",
+    "express": "^4.17.1",
+    "koa": "^2.11.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^8.0.6",
+    "uuid": "^3.4.0",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/uuid": "^3.4.6",
+    "@types/winston": "^2.4.4",
+    "@types/zen-observable": "^0.8.0",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "ts-node": "^8.5.2",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
+    "build": "tsc",
+    "start": "node -r ts-node/register app/server.ts"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "**/*.test.js",
+      "**/*.spec.js",
+      ".git",
+      "node_modules"
+    ],
+    "watch": [
+      "app",
+      "package.json",
+      "tslint.json",
+      "tsconfig.json"
+    ],
+    "exec": "yarn start",
+    "ext": "ts"
+  }
+}
